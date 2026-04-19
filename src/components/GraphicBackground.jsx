@@ -2,9 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 
-const GraphicBackground = ({ theme = "dark" }) => {
+const GraphicBackground = () => {
   const [ready, setReady] = useState(false);
-  const isLight = theme === "light";
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -34,24 +33,22 @@ const GraphicBackground = ({ theme = "dark" }) => {
       },
       particles: {
         number: {
-          value: isLight ? 80 : 110,
+          value: 110,
           density: { enable: true, width: 900, height: 900 },
         },
         color: {
-          value: isLight
-            ? ["#0ea5e9", "#3b82f6", "#6366f1", "#0891b2"]
-            : ["#7DD3FC", "#A5B4FC", "#C4B5FD", "#BAE6FD"],
+          value: ["#7DD3FC", "#A5B4FC", "#C4B5FD", "#BAE6FD"],
         },
         links: {
           enable: true,
           distance: 110,
-          color: isLight ? "#60a5fa" : "#93C5FD",
-          opacity: isLight ? 0.14 : 0.1,
+          color: "#93C5FD",
+          opacity: 0.1,
           width: 1,
           triangles: {
             enable: true,
-            color: isLight ? "#60a5fa" : "#A5B4FC",
-            opacity: isLight ? 0.05 : 0.03,
+            color: "#A5B4FC",
+            opacity: 0.03,
           },
         },
         move: {
@@ -64,7 +61,7 @@ const GraphicBackground = ({ theme = "dark" }) => {
           attract: { enable: true, rotateX: 280, rotateY: 560 },
         },
         opacity: {
-          value: isLight ? { min: 0.22, max: 0.7 } : { min: 0.14, max: 0.62 },
+          value: { min: 0.14, max: 0.62 },
           animation: {
             enable: true,
             speed: 0.55,
@@ -87,13 +84,16 @@ const GraphicBackground = ({ theme = "dark" }) => {
         },
       },
     }),
-    [isLight]
+    []
   );
 
   if (!ready) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none opacity-90" style={{ zIndex: -9 }}>
+    <div
+      className="fixed inset-0 pointer-events-none"
+      style={{ zIndex: 9, opacity: 1 }}
+    >
       <Particles id="graphic-background" options={options} />
     </div>
   );

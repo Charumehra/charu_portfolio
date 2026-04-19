@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const CursorTrail = ({ theme = "dark" }) => {
+const CursorTrail = () => {
   const [position, setPosition] = useState({ x: -200, y: -200 });
   const [isActive, setIsActive] = useState(false);
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
-  const isLight = theme === "light";
-  const dotColor = isLight ? "bg-slate-800/70" : "bg-blue-400/80";
-  const ringColor = isLight ? "border-slate-600/50" : "border-blue-400/40";
-  const shadowColor = isLight ? "rgba(51, 65, 85, 0.4)" : "rgba(96, 165, 250, 0.5)";
+  const dotColor = "bg-blue-400/80";
+  const ringColor = "border-blue-400/40";
+  const shadowColor = "rgba(96, 165, 250, 0.5)";
 
   useEffect(() => {
     const coarseQuery = window.matchMedia("(pointer: coarse)");
@@ -39,7 +38,6 @@ const CursorTrail = ({ theme = "dark" }) => {
 
   return (
     <div className="fixed inset-0 z-30 pointer-events-none overflow-hidden">
-      {/* Core dot */}
       <motion.div
         className={`absolute w-4 h-4 rounded-full ${dotColor} shadow-lg`}
         animate={{
@@ -54,7 +52,6 @@ const CursorTrail = ({ theme = "dark" }) => {
         }}
       />
 
-      {/* Outer ring */}
       <motion.div
         className={`absolute w-14 h-14 rounded-full border-2 ${ringColor}`}
         animate={{

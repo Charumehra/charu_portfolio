@@ -1,55 +1,39 @@
-import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import GraphicBackground from "./components/GraphicBackground";
 import CursorTrail from "./components/CursorTrail";
 
 function App() {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === "undefined") return "dark";
-    return window.localStorage.getItem("theme") || "dark";
-  });
-
-  useEffect(() => {
-    window.localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const isLight = theme === "light";
-
   return (
     <div
-      data-theme={theme}
-      className="min-h-screen scroll-smooth relative overflow-hidden bg-[color:var(--page-bg)] text-[color:var(--page-fg)]"
+      data-theme="dark"
+      className="min-h-screen scroll-smooth relative isolate bg-[color:var(--page-bg)] text-[color:var(--page-fg)]"
     >
+      <div className="fixed inset-0 z-0 bg-[#02030f]" />
+      <div className="space-vignette z-[1]" />
+      <div className="dev-grid z-[2]" />
+      <div className="square-spark-layer z-[3]" />
+      <div className="aurora-haze z-[4]" />
+      <div className="nebula-blob nebula-blob-one z-[5]" />
+      <div className="nebula-blob nebula-blob-two z-[5]" />
+      <div className="nebula-blob nebula-blob-three z-[5]" />
+      <div className="star-dust z-[6]" />
+      <div className="tiny-starfield z-[7]" />
+      <div className="meteor-layer z-[8]" />
 
-  <GraphicBackground theme={theme} />
-      <CursorTrail theme={theme} />
+      <GraphicBackground />
+      <CursorTrail />
 
-      {/* 🌑 Base Dark Background */}
-      <div className={`fixed inset-0 -z-10 ${isLight ? "bg-[#f8fafc]" : "bg-[#02030f]"}`} />
+      <div className="relative z-10">
+        <Navbar />
 
-      {/* ◻ Space Grid Overlay */}
-      <div className="dev-grid" />
+        <Home />
 
-      {/* ✨ Nebula Clouds */}
-      <div className="aurora-haze" />
-      <div className="nebula-blob nebula-blob-one" />
-      <div className="nebula-blob nebula-blob-two" />
-      <div className="nebula-blob nebula-blob-three" />
-      <div className="star-dust" />
-
-      {/* 🧭 Navbar */}
-      <Navbar theme={theme} onToggleTheme={() => setTheme(isLight ? "dark" : "light")} />
-
-      {/* 🏠 Home */}
-      <Home theme={theme} />
-
-      {/* 📌 About */}
-      <section
-        id="about"
-        className="min-h-screen flex items-center justify-center px-6 text-[color:var(--page-fg)]"
-      >
-        <div className="max-w-6xl text-center space-y-6">
+        <section
+          id="about"
+          className="min-h-screen flex items-center justify-center px-6 text-[color:var(--page-fg)]"
+        >
+          <div className="max-w-6xl text-center space-y-6 section-panel">
           <p className="font-display text-xs md:text-sm uppercase tracking-[0.28em] text-[color:var(--page-accent)]">
             About Me
           </p>
@@ -59,15 +43,14 @@ function App() {
           <p className="mx-auto max-w-4xl text-base sm:text-lg md:text-xl text-[color:var(--page-muted)] leading-relaxed">
             I design and build polished web experiences with stronger spacing, larger type, and a more expansive visual layout.
           </p>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* 💼 Projects */}
-      <section
-        id="projects"
-        className="min-h-screen flex items-center justify-center px-6 bg-[color:var(--page-surface)]"
-      >
-        <div className="max-w-6xl text-center space-y-6">
+        <section
+          id="projects"
+          className="min-h-screen flex items-center justify-center px-6 text-[color:var(--page-fg)]"
+        >
+          <div className="max-w-6xl text-center space-y-6 section-panel">
           <p className="font-display text-xs md:text-sm uppercase tracking-[0.28em] text-[color:var(--page-accent)]">
             Projects
           </p>
@@ -77,15 +60,14 @@ function App() {
           <p className="mx-auto max-w-4xl text-base sm:text-lg md:text-xl text-[color:var(--page-muted)] leading-relaxed">
             A selection of work focused on performance, clarity, and interfaces that feel larger and more immersive.
           </p>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* 📩 Contact */}
-      <section
-        id="contact"
-        className="min-h-screen flex items-center justify-center px-6 text-[color:var(--page-fg)]"
-      >
-        <div className="max-w-6xl text-center space-y-6">
+        <section
+          id="contact"
+          className="min-h-screen flex items-center justify-center px-6 text-[color:var(--page-fg)]"
+        >
+          <div className="max-w-6xl text-center space-y-6 section-panel">
           <p className="font-display text-xs md:text-sm uppercase tracking-[0.28em] text-[color:var(--page-accent)]">
             Contact
           </p>
@@ -95,8 +77,9 @@ function App() {
           <p className="mx-auto max-w-4xl text-base sm:text-lg md:text-xl text-[color:var(--page-muted)] leading-relaxed">
             If you want a sharper portfolio, a bigger visual presence, or a more animated experience, let&apos;s build it.
           </p>
-        </div>
-      </section>
+          </div>
+        </section>
+      </div>
 
     </div>
   );

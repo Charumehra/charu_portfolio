@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const heroWords = ["Hi, I'm Charu", "MERN Stack Developer"];
+const heroWords = ["Hi, I'm Charu Mehra", "MERN Stack Developer"];
 
-const Home = ({ theme = "dark" }) => {
+const Home = () => {
   return (
     <section
       id="home"
@@ -34,7 +34,7 @@ const Home = ({ theme = "dark" }) => {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="relative z-10 w-full max-w-6xl mx-auto"
       >
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto max-w-5xl text-center hero-panel">
           <h1 className="font-display font-black leading-[0.95] text-[color:var(--page-fg)] text-5xl sm:text-6xl md:text-7xl xl:text-[6rem]">
             {heroWords[0].split("").map((char, index) => (
               <span

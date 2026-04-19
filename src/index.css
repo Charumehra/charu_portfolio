@@ -19,17 +19,17 @@
 }
 
 [data-theme="light"] {
-	--page-bg: #f8fafc;
-	--page-fg: #0f172a;
+	--page-bg: #f4f8ff;
+	--page-fg: #0b1324;
 	--page-muted: #334155;
-	--page-soft: #475569;
-	--page-surface: rgba(255, 255, 255, 0.68);
-	--page-surface-strong: rgba(255, 255, 255, 0.88);
-	--page-border: rgba(15, 23, 42, 0.14);
-	--page-accent: #2563eb;
-	--page-accent-soft: rgba(37, 99, 235, 0.12);
+	--page-soft: #4b5d7a;
+	--page-surface: rgba(255, 255, 255, 0.74);
+	--page-surface-strong: rgba(255, 255, 255, 0.92);
+	--page-border: rgba(59, 130, 246, 0.2);
+	--page-accent: #1d4ed8;
+	--page-accent-soft: rgba(29, 78, 216, 0.12);
 	--color-cyan: #0891b2;
-	--color-purple: #9333ea;
+	--color-purple: #7c3aed;
 	--color-pink: #db2777;
 }
 
@@ -123,6 +123,50 @@ a {
 	}
 }
 
+@keyframes squareDrift {
+	0% {
+		transform: translate3d(0, 0, 0);
+	}
+	50% {
+		transform: translate3d(18px, -14px, 0);
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes twinkleShift {
+	0% {
+		opacity: 0.52;
+		transform: translate3d(0, 0, 0);
+	}
+	50% {
+		opacity: 0.8;
+		transform: translate3d(-10px, 6px, 0);
+	}
+	100% {
+		opacity: 0.52;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes meteorDrift {
+	0% {
+		transform: translate3d(0, 0, 0) rotate(18deg);
+		opacity: 0;
+	}
+	10% {
+		opacity: 0.8;
+	}
+	45% {
+		opacity: 0;
+	}
+	100% {
+		transform: translate3d(-220px, 180px, 0) rotate(18deg);
+		opacity: 0;
+	}
+}
+
 @keyframes gradientShift {
 	0% {
 		background-position: 0% 50%;
@@ -155,7 +199,7 @@ a {
 
 .nebula-blob {
 	position: fixed;
-	z-index: -10;
+	z-index: 5;
 	border-radius: 999px;
 	filter: blur(130px);
 	pointer-events: none;
@@ -194,9 +238,10 @@ a {
 .star-dust {
 	position: fixed;
 	inset: 0;
-	z-index: -10;
+	z-index: 6;
 	pointer-events: none;
-	opacity: 0.5;
+	opacity: 0.65;
+	mix-blend-mode: screen;
 	background-image:
 		radial-gradient(circle at 16% 26%, rgba(186, 230, 253, 0.45) 1px, transparent 2px),
 		radial-gradient(circle at 70% 32%, rgba(196, 181, 253, 0.42) 1px, transparent 2px),
@@ -209,9 +254,10 @@ a {
 .aurora-haze {
 	position: fixed;
 	inset: -10%;
-	z-index: -10;
+	z-index: 4;
 	pointer-events: none;
-	opacity: 0.42;
+	opacity: 0.58;
+	mix-blend-mode: screen;
 	filter: blur(80px) saturate(115%);
 	background:
 		radial-gradient(ellipse at 20% 20%, rgba(14, 165, 233, 0.22) 0%, rgba(14, 165, 233, 0) 62%),
@@ -223,9 +269,9 @@ a {
 .dev-grid {
 	position: fixed;
 	inset: -3%;
-	z-index: -10;
+	z-index: 2;
 	pointer-events: none;
-	opacity: 0.22;
+	opacity: 0.3;
 	background-image:
 		linear-gradient(rgba(71, 85, 105, 0.24) 1px, transparent 1px),
 		linear-gradient(90deg, rgba(71, 85, 105, 0.24) 1px, transparent 1px);
@@ -233,23 +279,44 @@ a {
 	animation: gridDrift 16s ease-in-out infinite;
 }
 
-[data-theme="light"] .aurora-haze {
-	opacity: 0.22;
-	filter: blur(75px) saturate(105%);
-	background:
-		radial-gradient(ellipse at 20% 20%, rgba(14, 165, 233, 0.12) 0%, rgba(14, 165, 233, 0) 62%),
-		radial-gradient(ellipse at 80% 30%, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0) 65%),
-		radial-gradient(ellipse at 55% 82%, rgba(139, 92, 246, 0.08) 0%, rgba(139, 92, 246, 0) 70%);
-}
-
-[data-theme="light"] .dev-grid {
-	opacity: 0.14;
+.square-spark-layer {
+	position: fixed;
+	inset: -3%;
+	z-index: 3;
+	pointer-events: none;
+	opacity: 0.34;
+	mix-blend-mode: screen;
 	background-image:
-		linear-gradient(rgba(148, 163, 184, 0.24) 1px, transparent 1px),
-		linear-gradient(90deg, rgba(148, 163, 184, 0.24) 1px, transparent 1px);
+		linear-gradient(rgba(125, 211, 252, 0.24) 2px, transparent 2px),
+		linear-gradient(90deg, rgba(125, 211, 252, 0.24) 2px, transparent 2px),
+		linear-gradient(rgba(99, 102, 241, 0.2) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(99, 102, 241, 0.2) 1px, transparent 1px);
+	background-size: 120px 120px, 120px 120px, 48px 48px, 48px 48px;
+	background-position: 0 0, 0 0, 12px 12px, 12px 12px;
+	animation: squareDrift 20s ease-in-out infinite;
 }
 
-/* Utility Classes for Enhanced Styling */
+.tiny-starfield {
+	position: fixed;
+	inset: 0;
+	z-index: 7;
+	pointer-events: none;
+	mix-blend-mode: screen;
+	background-image:
+		radial-gradient(circle at 8% 16%, rgba(219, 234, 254, 0.95) 1px, transparent 1.7px),
+		radial-gradient(circle at 22% 74%, rgba(191, 219, 254, 0.85) 1px, transparent 1.8px),
+		radial-gradient(circle at 38% 28%, rgba(147, 197, 253, 0.9) 1px, transparent 1.7px),
+		radial-gradient(circle at 52% 82%, rgba(224, 231, 255, 0.85) 1px, transparent 1.9px),
+		radial-gradient(circle at 66% 20%, rgba(196, 181, 253, 0.85) 1px, transparent 1.8px),
+		radial-gradient(circle at 78% 64%, rgba(186, 230, 253, 0.9) 1px, transparent 1.7px),
+		radial-gradient(circle at 92% 34%, rgba(125, 211, 252, 0.9) 1px, transparent 1.9px);
+	background-size: 240px 240px, 300px 300px, 260px 260px, 340px 340px, 280px 280px, 320px 320px, 360px 360px;
+	animation: twinkleShift 14s ease-in-out infinite;
+	opacity: 0.72;
+}
+
+
+
 .scale-hover:hover {
 	transform: scale(1.08);
 }
@@ -269,15 +336,93 @@ a {
 	background-clip: text;
 }
 
-/* Smooth transitions for interactive elements */
 button,
 a {
 	transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Enhanced focus states for accessibility */
 button:focus,
 a:focus {
 	outline: 2px solid var(--page-accent);
 	outline-offset: 2px;
+}
+
+.space-vignette {
+	position: fixed;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	background:
+		radial-gradient(circle at 50% 45%, rgba(2, 6, 23, 0) 0%, rgba(2, 6, 23, 0.3) 58%, rgba(2, 6, 23, 0.64) 100%);
+}
+
+.meteor-layer {
+	position: fixed;
+	inset: 0;
+	z-index: 8;
+	pointer-events: none;
+	opacity: 0.75;
+	mix-blend-mode: screen;
+}
+
+.meteor-layer::before,
+.meteor-layer::after {
+	content: "";
+	position: absolute;
+	width: 160px;
+	height: 2px;
+	background: linear-gradient(90deg, rgba(186, 230, 253, 0), rgba(186, 230, 253, 0.9), rgba(186, 230, 253, 0));
+	filter: drop-shadow(0 0 7px rgba(125, 211, 252, 0.75));
+	animation: meteorDrift 10s linear infinite;
+	transform-origin: left center;
+}
+
+.meteor-layer::before {
+	top: 20%;
+	right: 10%;
+	animation-delay: 1s;
+}
+
+.meteor-layer::after {
+	top: 40%;
+	right: 28%;
+	animation-delay: 5s;
+	animation-duration: 12s;
+}
+
+
+
+.hero-panel {
+	position: relative;
+	padding: 1.5rem;
+	border-radius: 1.75rem;
+	background: transparent;
+	border: 1px solid transparent;
+}
+
+.section-panel {
+	position: relative;
+	padding: 2.25rem 1.5rem;
+	border-radius: 1.75rem;
+	border: 1px solid var(--page-border);
+	background: var(--page-surface-strong);
+	backdrop-filter: blur(8px);
+	box-shadow: 0 18px 40px rgba(2, 6, 23, 0.18);
+}
+
+
+
+[data-theme="light"] .square-spark-layer {
+	opacity: 0.16;
+	mix-blend-mode: normal;
+	background-image:
+		linear-gradient(rgba(59, 130, 246, 0.16) 2px, transparent 2px),
+		linear-gradient(90deg, rgba(59, 130, 246, 0.16) 2px, transparent 2px),
+		linear-gradient(rgba(99, 102, 241, 0.12) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(99, 102, 241, 0.12) 1px, transparent 1px);
+}
+
+[data-theme="light"] .tiny-starfield {
+	opacity: 0.3;
+	mix-blend-mode: normal;
 }

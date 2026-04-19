@@ -1,22 +1,19 @@
 import { useState } from "react";
-import { MoonStar, SunMedium } from "lucide-react";
 
-const Navbar = ({ theme = "dark", onToggleTheme }) => {
+const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const isLight = theme === "light";
 
   const linkBase =
     "relative px-3 py-2 transition-all duration-300";
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-6xl bg-[color:var(--page-surface)]/85 backdrop-blur-2xl backdrop-saturate-150 border border-white/15 rounded-[1.25rem] shadow-[0_18px_60px_rgba(2,6,23,0.28)] ring-1 ring-white/10 text-[color:var(--page-fg)] z-50">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-6xl backdrop-blur-2xl backdrop-saturate-150 rounded-[1.25rem] text-[color:var(--page-fg)] z-50 bg-[color:var(--page-surface)]/85 border border-white/15 shadow-[0_18px_60px_rgba(2,6,23,0.28)] ring-1 ring-white/10">
       <div className="flex justify-between items-center px-6 py-4">
 
         <h1 className="font-display font-black text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-[color:var(--page-accent)] to-cyan-400">Charu Mehra</h1>
 
         <ul className="hidden md:flex gap-8 items-center">
 
-          {/* HOME - underline slide */}
           <li>
             <a
               href="#home"
@@ -26,7 +23,6 @@ const Navbar = ({ theme = "dark", onToggleTheme }) => {
             </a>
           </li>
 
-          {/* ABOUT - scale effect */}
           <li>
             <a
               href="#about"
@@ -36,7 +32,6 @@ const Navbar = ({ theme = "dark", onToggleTheme }) => {
             </a>
           </li>
 
-          {/* PROJECTS - glow effect */}
           <li>
             <a
               href="#projects"
@@ -46,7 +41,6 @@ const Navbar = ({ theme = "dark", onToggleTheme }) => {
             </a>
           </li>
 
-          {/* CONTACT - bounce */}
           <li>
             <a
               href="#contact"
@@ -58,30 +52,9 @@ const Navbar = ({ theme = "dark", onToggleTheme }) => {
 
           
 
-          <li>
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
-              title={isLight ? "Switch to dark mode" : "Switch to light mode"}
-              className="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/15 bg-white/10 hover:bg-white/20 shadow-sm transition"
-            >
-              {isLight ? <MoonStar size={18} /> : <SunMedium size={18} />}
-            </button>
-          </li>
         </ul>
 
-        {/* mobile */}
         <div className="flex items-center gap-2 md:hidden">
-          <button
-            type="button"
-            onClick={onToggleTheme}
-            aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
-            title={isLight ? "Switch to dark mode" : "Switch to light mode"}
-            className="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/15 bg-white/10 shadow-sm"
-          >
-            {isLight ? <MoonStar size={18} /> : <SunMedium size={18} />}
-          </button>
           <button onClick={() => setOpen(!open)} className="text-xl px-2">
             ☰
           </button>
