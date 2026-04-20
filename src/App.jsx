@@ -10,7 +10,7 @@ function App() {
       data-theme="dark"
       className="min-h-screen scroll-smooth relative isolate bg-[color:var(--page-bg)] text-[color:var(--page-fg)]"
     >
-      <div className="fixed inset-0 z-0 bg-[#02030f]" />
+      <div className="fixed inset-0 z-0 bg-[#000000]" />
       <div className="space-vignette z-[1]" />
       <div className="dev-grid z-[2]" />
       <div className="square-spark-layer z-[3]" />

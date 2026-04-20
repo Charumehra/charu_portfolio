@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
 const CursorTrail = () => {
   const [position, setPosition] = useState({ x: -200, y: -200 });
@@ -38,36 +37,30 @@ const CursorTrail = () => {
 
   return (
     <div className="fixed inset-0 z-30 pointer-events-none overflow-hidden">
-      <motion.div
-        className={`absolute w-4 h-4 rounded-full ${dotColor} shadow-lg`}
-        animate={{
-          x: position.x - 8,
-          y: position.y - 8,
-          opacity: isActive ? 0.9 : 0,
-        }}
-        transition={{ type: "spring", damping: 24, stiffness: 260, mass: 0.25 }}
-        style={{
-          boxShadow: `0 0 20px ${shadowColor}`,
-          willChange: "transform, opacity",
-        }}
-      />
+      <div className="relative h-full w-full">
+        <div
+          className={`absolute w-4 h-4 rounded-full ${dotColor} shadow-lg`}
+          style={{
+            transform: `translate3d(${position.x - 8}px, ${position.y - 8}px, 0)`,
+            opacity: isActive ? 0.9 : 0,
+            transition:
+              "transform 120ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease-out",
+            boxShadow: `0 0 20px ${shadowColor}`,
+            willChange: "transform, opacity",
+          }}
+        />
 
-      <motion.div
-        className={`absolute w-14 h-14 rounded-full border-2 ${ringColor}`}
-        animate={{
-          x: position.x - 28,
-          y: position.y - 28,
-          opacity: isActive ? 0.5 : 0,
-          scale: isActive ? [1, 1.08, 1] : 1,
-        }}
-        transition={{
-          x: { duration: 0.22, ease: "easeOut" },
-          y: { duration: 0.22, ease: "easeOut" },
-          opacity: { duration: 0.3, ease: "easeOut" },
-          scale: { duration: 1.4, repeat: Infinity, ease: "easeInOut" },
-        }}
-        style={{ willChange: "transform, opacity" }}
-      />
+        <div
+          className={`absolute w-14 h-14 rounded-full border-2 ${ringColor}`}
+          style={{
+            transform: `translate3d(${position.x - 28}px, ${position.y - 28}px, 0) scale(${isActive ? 1.04 : 1})`,
+            opacity: isActive ? 0.5 : 0,
+            transition:
+              "transform 180ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease-out",
+            willChange: "transform, opacity",
+          }}
+        />
+      </div>
     </div>
   );
 };
