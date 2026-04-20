@@ -2,71 +2,80 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const navLinks = [
+    { href: "#home", label: "Home" },
+    { href: "#about", label: "About" },
+    { href: "#projects", label: "Projects" },
+    { href: "#contact", label: "Contact" },
+  ];
 
-  const linkBase =
-    "relative px-3 py-2 transition-all duration-300";
+  const desktopLinkBase =
+    "relative rounded-full px-4 py-2 text-sm font-semibold tracking-wide text-slate-100/90 transition-all duration-300 hover:text-white hover:bg-white/10";
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-6xl backdrop-blur-2xl backdrop-saturate-150 rounded-[1.25rem] text-[color:var(--page-fg)] z-50 bg-[color:var(--page-surface)]/85 border border-white/15 shadow-[0_18px_60px_rgba(2,6,23,0.28)] ring-1 ring-white/10">
-      <div className="flex justify-between items-center px-6 py-4">
+    <nav className="fixed left-1/2 top-3 z-50 w-[calc(100%-1rem)] max-w-6xl -translate-x-1/2 rounded-2xl border border-white/15 bg-slate-950/65 text-[color:var(--page-fg)] shadow-[0_24px_70px_rgba(2,6,23,0.45)] ring-1 ring-cyan-400/10 backdrop-blur-2xl backdrop-saturate-150 sm:top-4 sm:w-[calc(100%-2rem)]">
+      <div className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
+        <a href="#home" className="group inline-flex items-center gap-2">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-cyan-300/25 bg-cyan-400/10 text-xs font-black tracking-wider text-cyan-300 transition-all duration-300 group-hover:border-cyan-300/50 group-hover:bg-cyan-300/20">
+            CM
+          </span>
+          <span className="font-display text-xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-r from-[color:var(--page-accent)] to-cyan-300 sm:text-2xl">
+            Charu Mehra
+          </span>
+        </a>
 
-        <h1 className="font-display font-black text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-[color:var(--page-accent)] to-cyan-400">Charu Mehra</h1>
-
-        <ul className="hidden md:flex gap-8 items-center">
-
-          <li>
-            <a
-              href="#home"
-              className={`${linkBase} hover:text-[color:var(--page-accent)] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[3px] after:w-0 hover:after:w-full after:bg-gradient-to-r after:from-[color:var(--page-accent)] after:to-cyan-400 after:transition-all after:rounded-full`}
-            >
-              Home
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#about"
-              className={`${linkBase} hover:scale-110 hover:text-[color:var(--page-accent)] transition-all`}
-            >
-              About
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#projects"
-              className={`${linkBase} hover:text-[color:var(--page-accent)] hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.6)] transition-all`}
-            >
-              Projects
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#contact"
-              className={`${linkBase} hover:text-cyan-400 hover:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)] transition-all`}
-            >
-              Contact
-            </a>
-          </li>
-
-          
-
+        <ul className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1 md:flex">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className={`${desktopLinkBase} after:absolute after:inset-x-4 after:bottom-1 after:h-[2px] after:origin-left after:scale-x-0 after:rounded-full after:bg-gradient-to-r after:from-[color:var(--page-accent)] after:to-cyan-300 after:transition-transform after:duration-300 hover:after:scale-x-100`}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
 
-        <div className="flex items-center gap-2 md:hidden">
-          <button onClick={() => setOpen(!open)} className="text-xl px-2">
-            ☰
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => setOpen((prev) => !prev)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-slate-100 shadow-sm transition-all duration-300 hover:border-cyan-300/40 hover:bg-cyan-400/10 md:hidden"
+        >
+          <span className="relative h-4 w-5">
+            <span
+              className={`absolute left-0 top-0 h-[2px] w-5 bg-current transition-all duration-300 ${
+                open ? "top-[7px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[7px] h-[2px] w-5 bg-current transition-all duration-300 ${
+                open ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[14px] h-[2px] w-5 bg-current transition-all duration-300 ${
+                open ? "top-[7px] -rotate-45" : ""
+              }`}
+            />
+          </span>
+        </button>
       </div>
 
       {open && (
-        <div className="md:hidden mx-4 mb-4 mt-1 flex flex-col gap-3 rounded-xl border border-white/15 bg-[color:var(--page-surface)]/90 backdrop-blur-2xl backdrop-saturate-150 px-4 py-4 text-[color:var(--page-fg)] shadow-[0_16px_50px_rgba(2,6,23,0.2)]">
-          <a href="#home" className="py-1">Home</a>
-          <a href="#about" className="py-1">About</a>
-          <a href="#projects" className="py-1">Projects</a>
-          <a href="#contact" className="py-1">Contact</a>
+        <div className="mx-4 mb-4 mt-1 flex flex-col gap-2 rounded-2xl border border-white/15 bg-slate-900/85 p-3 text-[color:var(--page-fg)] shadow-[0_20px_60px_rgba(2,6,23,0.35)] backdrop-blur-2xl md:hidden">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-4 py-3 text-sm font-semibold tracking-wide text-slate-100/90 transition-all duration-300 hover:bg-cyan-400/10 hover:text-cyan-200"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       )}
     </nav>

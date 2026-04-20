@@ -7,21 +7,21 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 pt-36 pb-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 pt-24 sm:pt-28 md:pt-36 pb-14 sm:pb-20"
     >
       <div className="absolute inset-0">
         <motion.div
-          className="absolute left-[8%] top-[14%] w-80 h-80 bg-slate-600 rounded-full blur-3xl opacity-20"
+          className="absolute left-[-18%] top-[10%] h-52 w-52 sm:left-[2%] sm:top-[12%] sm:h-72 sm:w-72 md:left-[8%] md:top-[14%] md:h-80 md:w-80 bg-slate-600 rounded-full blur-3xl opacity-20"
           animate={{ x: [0, 90, 0], y: [0, 40, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute right-[5%] top-[18%] w-96 h-96 bg-slate-800 rounded-full blur-3xl opacity-18"
+          className="absolute right-[-24%] top-[16%] h-60 w-60 sm:right-[-10%] sm:top-[18%] sm:h-80 sm:w-80 md:right-[5%] md:h-96 md:w-96 bg-slate-800 rounded-full blur-3xl opacity-18"
           animate={{ x: [0, -70, 0], y: [0, -55, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute left-[28%] bottom-[8%] w-[26rem] h-[26rem] bg-cyan-500 rounded-full blur-3xl opacity-10"
+          className="absolute left-[8%] bottom-[-14%] h-64 w-64 sm:left-[18%] sm:bottom-[-10%] sm:h-80 sm:w-80 md:left-[28%] md:bottom-[8%] md:h-[26rem] md:w-[26rem] bg-cyan-500 rounded-full blur-3xl opacity-10"
           animate={{ x: [0, 60, 0], y: [0, -35, 0] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -32,10 +32,10 @@ const Home = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative z-10 w-full max-w-6xl mx-auto"
+        className="relative z-10 mx-auto w-full max-w-6xl"
       >
-        <div className="mx-auto max-w-5xl text-center hero-panel">
-          <h1 className="font-display font-black leading-[0.95] text-[color:var(--page-fg)] text-5xl sm:text-6xl md:text-7xl xl:text-[6rem]">
+        <div className="mx-auto max-w-5xl text-center hero-panel px-1 sm:px-0">
+          <h1 className="font-serif font-black leading-[0.95] text-[color:var(--page-fg)] whitespace-nowrap text-[clamp(1.35rem,6.2vw,2.6rem)] md:text-5xl lg:text-6xl xl:text-[5rem]">
             {heroWords[0].split("").map((char, index) => (
               <span
                 key={`hero-${index}`}
@@ -46,7 +46,7 @@ const Home = () => {
             ))}
           </h1>
 
-          <h2 className="mt-5 font-display text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-[color:var(--page-muted)]">
+          <h2 className="mt-3 md:mt-4 font-display text-base sm:text-xl md:text-2xl xl:text-3xl text-[color:var(--page-muted)]">
             {heroWords[1].split("").map((char, index) => (
               <span
                 key={`role-${index}`}
@@ -57,17 +57,15 @@ const Home = () => {
             ))}
           </h2>
 
-          <p className="mx-auto mt-7 max-w-4xl text-lg sm:text-xl md:text-2xl text-[color:var(--page-accent)] font-semibold leading-relaxed">
-            React, Node.js, Express, MongoDB, and clean UI systems built for speed and
-            clarity.
+          <p className="mx-auto mt-4 md:mt-6 max-w-4xl text-sm sm:text-base md:text-xl lg:text-2xl text-[color:var(--page-accent)] font-serif leading-relaxed">
+           I specialize in building fast, modern, and scalable web applications using React, Node.js, Express, and MongoDB — with a strong focus on clean, intuitive UI systems.
           </p>
 
-          <p className="mx-auto mt-5 max-w-4xl text-base sm:text-lg md:text-xl text-[color:var(--page-muted)] leading-relaxed">
-            I build fast, modern, and interactive web apps with stronger
-            spacing, bigger type, and a more immersive visual rhythm.
+          <p className="mx-auto mt-4 sm:mt-5 max-w-3xl text-sm sm:text-base md:text-lg text-[color:var(--page-muted)] leading-relaxed">
+          I craft interactive digital experiences where thoughtful spacing, bold typography, and immersive visual rhythm come together to create seamless and engaging user interfaces.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 sm:mt-10 mx-auto flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
             <motion.a
               href="#contact"
               whileHover={{
@@ -75,7 +73,7 @@ const Home = () => {
                 boxShadow: "0 20px 45px rgba(59,130,246,0.4)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[color:var(--page-accent)] to-cyan-500 text-white text-base md:text-lg font-semibold shadow-lg transition-all duration-300"
+              className="w-full rounded-2xl bg-gradient-to-r from-[color:var(--page-accent)] to-cyan-500 px-6 py-3 text-center text-sm font-semibold text-white shadow-lg transition-all duration-300 sm:w-auto sm:px-8 sm:py-3.5 sm:text-base md:text-lg"
             >
               Let&apos;s Connect
             </motion.a>
@@ -89,7 +87,7 @@ const Home = () => {
                 backgroundColor: "rgba(59,130,246,0.2)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-3.5 rounded-2xl border-2 border-[color:var(--page-accent)] text-[color:var(--page-accent)] text-base md:text-lg font-semibold bg-[color:var(--page-surface)]/40 transition-all duration-300"
+              className="w-full rounded-2xl border-2 border-[color:var(--page-accent)] bg-[color:var(--page-surface)]/40 px-6 py-3 text-center text-sm font-semibold text-[color:var(--page-accent)] transition-all duration-300 sm:w-auto sm:px-8 sm:py-3.5 sm:text-base md:text-lg"
             >
               View Resume
             </motion.a>
