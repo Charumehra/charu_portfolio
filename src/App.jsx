@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+import About from "./components/About";
 import GraphicBackground from "./components/GraphicBackground";
 import CursorTrail from "./components/CursorTrail";
 
@@ -29,22 +30,7 @@ function App() {
 
         <Home />
 
-        <section
-          id="about"
-          className="min-h-screen flex items-center justify-center px-6 text-[color:var(--page-fg)]"
-        >
-          <div className="max-w-6xl text-center space-y-6 section-panel">
-          <p className="font-display text-xs md:text-sm uppercase tracking-[0.28em] text-[color:var(--page-accent)]">
-            About Me
-          </p>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.98]">
-            Designing polished web experiences
-          </h2>
-          <p className="mx-auto max-w-4xl text-base sm:text-lg md:text-xl text-[color:var(--page-muted)] leading-relaxed">
-            I design and build polished web experiences with stronger spacing, larger type, and a more expansive visual layout.
-          </p>
-          </div>
-        </section>
+        <About />
 
         <section
           id="projects"
