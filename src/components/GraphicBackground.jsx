@@ -4,6 +4,7 @@ import { loadFull } from "tsparticles";
 
 const GraphicBackground = () => {
   const [ready, setReady] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(false);
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -13,27 +14,39 @@ const GraphicBackground = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px), (pointer: coarse)");
+    const updateMode = () => setIsLightMode(mediaQuery.matches);
+
+    updateMode();
+    mediaQuery.addEventListener("change", updateMode);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateMode);
+    };
+  }, []);
+
   const options = useMemo(
     () => ({
       fullScreen: { enable: false },
-      fpsLimit: 60,
+      fpsLimit: isLightMode ? 40 : 60,
       detectRetina: true,
       background: { color: { value: "transparent" } },
       interactivity: {
         events: {
-          onHover: { enable: true, mode: "grab" },
+          onHover: { enable: false, mode: "grab" },
           resize: { enable: true },
         },
         modes: {
           grab: {
-            distance: 130,
-            links: { opacity: 0.28 },
+            distance: 90,
+            links: { opacity: 0.16 },
           },
         },
       },
       particles: {
         number: {
-          value: 110,
+          value: isLightMode ? 45 : 80,
           density: { enable: true, width: 900, height: 900 },
         },
         color: {
@@ -41,12 +54,12 @@ const GraphicBackground = () => {
         },
         links: {
           enable: true,
-          distance: 110,
+          distance: isLightMode ? 95 : 105,
           color: "#93C5FD",
-          opacity: 0.1,
+          opacity: isLightMode ? 0.06 : 0.09,
           width: 1,
           triangles: {
-            enable: true,
+            enable: false,
             color: "#A5B4FC",
             opacity: 0.03,
           },
@@ -56,15 +69,15 @@ const GraphicBackground = () => {
           direction: "none",
           outModes: { default: "out" },
           random: false,
-          speed: 0.5,
+          speed: isLightMode ? 0.35 : 0.45,
           straight: false,
-          attract: { enable: true, rotateX: 280, rotateY: 560 },
+          attract: { enable: false, rotateX: 280, rotateY: 560 },
         },
         opacity: {
-          value: { min: 0.14, max: 0.62 },
+          value: { min: 0.14, max: isLightMode ? 0.45 : 0.58 },
           animation: {
             enable: true,
-            speed: 0.55,
+            speed: isLightMode ? 0.42 : 0.5,
             minimumValue: 0.1,
             sync: false,
           },
@@ -74,17 +87,17 @@ const GraphicBackground = () => {
           polygon: { sides: 5 },
         },
         size: {
-          value: { min: 0.8, max: 3.2 },
+          value: { min: 0.8, max: isLightMode ? 2.6 : 3 },
           animation: {
             enable: true,
-            speed: 1.8,
+            speed: isLightMode ? 1.2 : 1.5,
             minimumValue: 0.5,
             sync: false,
           },
         },
       },
     }),
-    []
+    [isLightMode]
   );
 
   if (!ready) return null;

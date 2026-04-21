@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CursorTrail = () => {
   const [position, setPosition] = useState({ x: -200, y: -200 });
   const [isActive, setIsActive] = useState(false);
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
+  const pointerRef = useRef({ x: -200, y: -200 });
+  const frameRef = useRef(null);
+  const activeRef = useRef(false);
 
   const dotColor = "bg-blue-400/80";
   const ringColor = "border-blue-400/40";
@@ -16,12 +19,26 @@ const CursorTrail = () => {
     updatePointerType();
     coarseQuery.addEventListener("change", updatePointerType);
 
-    const handleMove = (event) => {
-      setPosition({ x: event.clientX, y: event.clientY });
-      setIsActive(true);
+    const flushPosition = () => {
+      setPosition(pointerRef.current);
+      frameRef.current = null;
     };
 
-    const handleLeave = () => setIsActive(false);
+    const handleMove = (event) => {
+      pointerRef.current = { x: event.clientX, y: event.clientY };
+      if (!activeRef.current) {
+        activeRef.current = true;
+        setIsActive(true);
+      }
+      if (!frameRef.current) {
+        frameRef.current = requestAnimationFrame(flushPosition);
+      }
+    };
+
+    const handleLeave = () => {
+      activeRef.current = false;
+      setIsActive(false);
+    };
 
     window.addEventListener("mousemove", handleMove, { passive: true });
     window.addEventListener("mouseleave", handleLeave);
@@ -30,6 +47,9 @@ const CursorTrail = () => {
       coarseQuery.removeEventListener("change", updatePointerType);
       window.removeEventListener("mousemove", handleMove);
       window.removeEventListener("mouseleave", handleLeave);
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
     };
   }, []);
 

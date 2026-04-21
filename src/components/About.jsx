@@ -183,14 +183,14 @@ const About = () => {
                 className="relative mt-4"
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ amount: 0.25 }}
+                viewport={{ amount: 0.25, once: true }}
                 variants={timelineVariants}
               >
                 <motion.span
                   className="pointer-events-none absolute left-[13px] top-2 h-[calc(100%-0.5rem)] w-px bg-gradient-to-b from-cyan-300/75 via-cyan-200/45 to-transparent sm:left-[15px]"
                   initial={{ scaleY: 0, opacity: 0.4 }}
                   whileInView={{ scaleY: 1, opacity: 1 }}
-                  viewport={{ amount: 0.2 }}
+                  viewport={{ amount: 0.2, once: true }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
                   style={{ originY: 0 }}
                 />

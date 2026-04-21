@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
+import Contact from "./components/Contact";
 import GraphicBackground from "./components/GraphicBackground";
 import CursorTrail from "./components/CursorTrail";
 
@@ -49,22 +50,7 @@ function App() {
           </div>
         </section>
 
-        <section
-          id="contact"
-          className="min-h-screen flex items-center justify-center px-6 text-[color:var(--page-fg)]"
-        >
-          <div className="max-w-6xl text-center space-y-6 section-panel">
-          <p className="font-display text-xs md:text-sm uppercase tracking-[0.28em] text-[color:var(--page-accent)]">
-            Contact
-          </p>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.98]">
-            Let&apos;s build something striking
-          </h2>
-          <p className="mx-auto max-w-4xl text-base sm:text-lg md:text-xl text-[color:var(--page-muted)] leading-relaxed">
-            If you want a sharper portfolio, a bigger visual presence, or a more animated experience, let&apos;s build it.
-          </p>
-          </div>
-        </section>
+        <Contact />
       </div>
 
     </div>
