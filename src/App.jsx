@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 import GraphicBackground from "./components/GraphicBackground";
 import CursorTrail from "./components/CursorTrail";
 
@@ -51,6 +52,8 @@ function App() {
         </section>
 
         <Contact />
+
+        <Footer />
       </div>
 
     </div>
