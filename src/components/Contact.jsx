@@ -1,125 +1,153 @@
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail, FiSend, FiMapPin } from "react-icons/fi";
+import { Card } from "./ui/Card";
+import { Button } from "./ui/Button";
 
-const contactItems = [
-  {
-    title: "GitHub",
-    subtitle: "Explore my repositories",
-    value: "github.com/Charumehra",
-    href: "https://github.com/Charumehra",
-    icon: FiGithub,
-    glow: "from-cyan-400/35 to-blue-500/15",
-    border: "border-cyan-300/35",
-  },
-  {
-    title: "LinkedIn",
-    subtitle: "Connect professionally",
-    value: "charu-mehra-cm",
-    href: "https://www.linkedin.com/in/charu-mehra-cm/",
-    icon: FiLinkedin,
-    glow: "from-sky-400/35 to-indigo-500/15",
-    border: "border-sky-300/35",
-  },
-  {
-    title: "Gmail",
-    subtitle: "Send me an email",
-    value: "charumehracm2004@gmail.com",
-    href: "mailto:charumehracm2004@gmail.com",
-    icon: FiMail,
-    glow: "from-rose-400/35 to-orange-400/15",
-    border: "border-rose-300/35",
-  },
+// Import the official Browser SDK
+import emailjs from "@emailjs/browser";
+
+const contactMethods = [
+  { label: "LinkedIn", value: "charu-mehra-cm", href: "https://www.linkedin.com/in/charu-mehra-cm/", icon: FiLinkedin, activeText: "Let's Connect" },
+  { label: "GitHub", value: "github.com/Charumehra", href: "https://github.com/Charumehra", icon: FiGithub, activeText: "Review Source" },
+  { label: "Email", value: "charumehracm2004@gmail.com", href: "mailto:charumehracm2004@gmail.com", icon: FiMail, activeText: "Drop an Email" },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0, y: 26 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeOut",
-      when: "beforeChildren",
-      staggerChildren: 0.14,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.52, ease: "easeOut" },
-  },
-};
-
 const Contact = () => {
+  const [formState, setFormState] = useState({ name: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Live EmailJS Serverless Integration
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Form parameter template matching the EmailJS Dashboard setup keys
+    const templateParams = {
+      from_name: formState.name,
+      reply_to: formState.email,
+      message: formState.message,
+    };
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      alert("Payload dispatched successfully! I will reach out shortly.");
+      setFormState({ name: "", email: "", message: "" }); // Flushes standard inputs
+    } catch (error) {
+      console.error("System dispatch fault:", error);
+      alert("Transmission failed. Please use direct links on the left.");
+    } finally {
+      setIsSubmitting(false); // Re-enables input tracking
+    }
+  };
+
   return (
-    <section
-      id="contact"
-      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-20 text-[color:var(--page-fg)]"
-    >
-      <motion.div
-        className="w-full max-w-6xl section-panel"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ amount: 0.25, once: true }}
-      >
-        <div className="text-center space-y-5">
-          <p className="font-display text-xs sm:text-sm uppercase tracking-[0.28em] text-[color:var(--page-accent)]">
-            Contact
-          </p>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.02]">
-            Reach out and let&apos;s build something modern
-          </h2>
-          <p className="mx-auto max-w-4xl text-sm sm:text-base md:text-lg text-[color:var(--page-muted)] leading-relaxed">
-            Open for collaborations, freelance work, and full-stack opportunities. Pick the channel you prefer and I&apos;ll respond quickly.
-          </p>
+    <section id="contact" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-24 bg-slate-950/40">
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 items-stretch">
+        
+        {/* Left Communication Channels Anchor */}
+        <div className="flex flex-col justify-between space-y-8">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-cyan-400">
+              Connection Terminal
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+              Let's scale something beautiful together.
+            </h2>
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-md">
+              Whether you want to build an enterprise web app, coordinate a project, or just talk system architecture—feel free to drop a line.
+            </p>
+          </div>
+
+          <div className="space-y-3.5">
+            {contactMethods.map((method) => {
+              const Icon = method.icon;
+              return (
+                <a
+                  key={method.label}
+                  href={method.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-slate-900/20 hover:bg-slate-900/60 hover:border-cyan-500/30 transition-all group"
+                >
+                  <div className="flex items-center gap-3.5">
+                    <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/5 text-slate-400 group-hover:bg-cyan-500/10 group-hover:text-cyan-400 transition-colors">
+                      <Icon className="text-lg" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{method.label}</p>
+                      <p className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors mt-0.5">{method.value}</p>
+                    </div>
+                  </div>
+                  <span className="text-xs font-mono text-slate-600 group-hover:text-cyan-400 transition-colors pr-2">
+                    {method.activeText} →
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center gap-2.5 text-xs font-mono text-slate-500 pt-4 border-t border-white/5">
+            <FiMapPin className="text-cyan-400 text-sm animate-pulse" />
+            <span>Based out of Delhi NCR, India — Operating Globally</span>
+          </div>
         </div>
 
-        <motion.div className="mt-10 grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-3" variants={containerVariants}>
-          {contactItems.map((item) => {
-            const Icon = item.icon;
+        {/* Right Form Shell */}
+        <Card hoverEffect={false} className="relative flex flex-col justify-center border-white/10 bg-slate-900/40 backdrop-blur-2xl">
+          <h3 className="text-lg font-bold text-white tracking-tight mb-1">Direct Message Pipeline</h3>
+          <p className="text-xs text-slate-400 mb-6">Asynchronous secure transmission layer</p>
+          
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="group relative border-b border-white/10 focus-within:border-cyan-400 transition-colors">
+              <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-cyan-400 transition-colors">Identification Name</label>
+              <input
+                type="text"
+                required
+                value={formState.name}
+                onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                placeholder="e.g., Jane Doe"
+                className="w-full bg-transparent py-3 text-sm text-white placeholder-slate-600 focus:outline-none"
+              />
+            </div>
 
-            return (
-              <motion.a
-                key={item.title}
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                variants={cardVariants}
-                whileHover={{ y: -6, scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
-                className={`group relative overflow-hidden rounded-2xl border ${item.border} bg-[color:var(--page-surface)]/85 p-5 sm:p-6 backdrop-blur-xl shadow-[0_16px_50px_rgba(2,6,23,0.35)]`}
-              >
-                <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${item.glow} opacity-80 transition-opacity duration-300 group-hover:opacity-100`} />
-                <div className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-white/10 blur-2xl" />
+            <div className="group relative border-b border-white/10 focus-within:border-cyan-400 transition-colors">
+              <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-cyan-400 transition-colors">Electronic Mail Address</label>
+              <input
+                type="email"
+                required
+                value={formState.email}
+                onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                placeholder="e.g., name@company.com"
+                className="w-full bg-transparent py-3 text-sm text-white placeholder-slate-600 focus:outline-none"
+              />
+            </div>
 
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-slate-900/80 text-cyan-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">
-                      <Icon className="text-xl" />
-                    </div>
-                    <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-100/90">
-                      {item.title}
-                    </span>
-                  </div>
+            <div className="group relative border-b border-white/10 focus-within:border-cyan-400 transition-colors">
+              <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-cyan-400 transition-colors">Payload Message</label>
+              <textarea
+                required
+                rows={4}
+                value={formState.message}
+                onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                placeholder="Describe project details or required infrastructure specs..."
+                className="w-full bg-transparent py-3 text-sm text-white placeholder-slate-600 resize-none focus:outline-none"
+              />
+            </div>
 
-                  <p className="mt-5 text-lg sm:text-xl font-semibold text-white">{item.subtitle}</p>
-                  <p className="mt-2 break-all text-sm sm:text-base text-slate-200/90">{item.value}</p>
+            <Button type="submit" variant="primary" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Transmitting..." : <><FiSend /> Dispatch Payload</>}
+            </Button>
+          </form>
+        </Card>
 
-                  <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs sm:text-sm font-semibold text-white/95 transition-colors duration-300 group-hover:bg-white/20">
-                    Open Link
-                    <span className="text-base leading-none">-&gt;</span>
-                  </div>
-                </div>
-              </motion.a>
-            );
-          })}
-        </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 };

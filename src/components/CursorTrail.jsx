@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 
 const CursorTrail = () => {
   const [position, setPosition] = useState({ x: -200, y: -200 });
   const [isActive, setIsActive] = useState(false);
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
   const pointerRef = useRef({ x: -200, y: -200 });
   const frameRef = useRef(null);
   const activeRef = useRef(false);
@@ -53,7 +55,7 @@ const CursorTrail = () => {
     };
   }, []);
 
-  if (isCoarsePointer) return null;
+  if (isCoarsePointer || prefersReducedMotion) return null;
 
   return (
     <div className="fixed inset-0 z-30 pointer-events-none overflow-hidden">

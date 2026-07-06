@@ -1,61 +1,43 @@
+import React, { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
+import Project from "./components/Project";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import GraphicBackground from "./components/GraphicBackground";
-import CursorTrail from "./components/CursorTrail";
+import Experience from "./components/Experience";
+
+const GraphicBackground = lazy(() => import("./components/GraphicBackground"));
+const CursorTrail = lazy(() => import("./components/CursorTrail"));
 
 function App() {
   return (
     <div
       data-theme="dark"
-      className="min-h-screen scroll-smooth relative isolate bg-[color:var(--page-bg)] text-[color:var(--page-fg)]"
+      className="min-h-screen relative isolate bg-slate-950 text-slate-100 antialiased overflow-x-hidden font-sans selection:bg-cyan-500/30 selection:text-cyan-200"
     >
-      <div className="fixed inset-0 z-0 bg-[#000000]" />
-      <div className="space-vignette z-[1]" />
-      <div className="dev-grid z-[2]" />
-      <div className="square-spark-layer z-[3]" />
-      <div className="aurora-haze z-[4]" />
-      <div className="nebula-blob nebula-blob-one z-[5]" />
-      <div className="nebula-blob nebula-blob-two z-[5]" />
-      <div className="nebula-blob nebula-blob-three z-[5]" />
-      <div className="star-dust z-[6]" />
-      <div className="tiny-starfield z-[7]" />
-      <div className="meteor-layer z-[8]" />
+      {/* Structural Low-frequency Visual Mesh Overlays */}
+      <div className="fixed inset-0 z-0 bg-[#030712]" />
+      <div className="fixed inset-0 z-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,#000_100%)] pointer-events-none" />
 
-      <GraphicBackground />
-      <CursorTrail />
+      {/* Asynchronous Performance Background Processing */}
+      <Suspense fallback={null}>
+        <GraphicBackground />
+        <CursorTrail />
+      </Suspense>
 
-      <div className="relative z-10">
+      {/* Main Structural Z-Indexed Document Flow */}
+      <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
-
-        <Home />
-
-        <About />
-
-        <section
-          id="projects"
-          className="min-h-screen flex items-center justify-center px-6 text-[color:var(--page-fg)]"
-        >
-          <div className="max-w-6xl text-center space-y-6 section-panel">
-          <p className="font-display text-xs md:text-sm uppercase tracking-[0.28em] text-[color:var(--page-accent)]">
-            Projects
-          </p>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.98]">
-            Work that feels modern and refined
-          </h2>
-          <p className="mx-auto max-w-4xl text-base sm:text-lg md:text-xl text-[color:var(--page-muted)] leading-relaxed">
-            A selection of work focused on performance, clarity, and interfaces that feel larger and more immersive.
-          </p>
-          </div>
-        </section>
-
-        <Contact />
-
+        <main className="flex-1">
+          <Home />
+          <About />
+          <Experience />
+          <Project />
+          <Contact />
+        </main>
         <Footer />
       </div>
-
     </div>
   );
 }
