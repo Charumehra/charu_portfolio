@@ -43,8 +43,8 @@ export const PROJECTS = [
     description: "An advanced, full-stack AI Cover Letter orchestration ecosystem that transforms raw application contexts into production-grade professional documentation using targeted generative pipelines.",
     metrics: { efficiency: "+140% speed", accuracy: "99.4%" },
     tags: ["React", "Node.js", "Express", "MongoDB", "Gemini API", "Tailwind CSS"],
-    githubUrl: "https://github.com/Charumehra/Cine_Stream",
-    liveUrl: "https://ai-cover-letter-maker-z3r1.vercel.app/"
+    githubUrl: "https://github.com/Charumehra/CareerForgeAI.git",
+    liveUrl: "https://career-forge-ai-gules.vercel.app/"
   },
   {
     id: "educore",
@@ -54,8 +54,8 @@ export const PROJECTS = [
     description: "An interactive automated study suite enabling lightning-fast extraction of complex context from research materials, bundled with an automated technical quiz engine.",
     metrics: { parseSpeed: "<2.4s/MB", dataRetention: "98.2%" },
     tags: ["MERN Stack", "Redux Toolkit", "PDF Processing Pipelines", "Framer Motion"],
-    githubUrl: "https://github.com/Charumehra",
-    liveUrl: "#"
+    githubUrl: "https://github.com/Charumehra/prodesk-capstone-EduCore.git",
+    liveUrl: "https://charu-educore-main.vercel.app/"
   }
 ];
 
