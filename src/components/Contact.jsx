@@ -68,12 +68,13 @@ const Contact = () => {
           <div className="space-y-3.5">
             {contactMethods.map((method) => {
               const Icon = method.icon;
+              const isEmail = method.label === "Email";
               return (
                 <a
                   key={method.label}
                   href={method.href}
-                  target="_blank"
-                  rel="noreferrer"
+                  target={isEmail ? undefined : "_blank"}
+                  rel={isEmail ? undefined : "noreferrer"}
                   className="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-slate-900/20 hover:bg-slate-900/60 hover:border-cyan-500/30 transition-all group"
                 >
                   <div className="flex items-center gap-3.5">
