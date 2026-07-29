@@ -69,11 +69,40 @@ export const PIPELINE_MILESTONES = [
 
 export const EXPERIENCES = [
   {
+  id: "bluglint-solutions",
+  role: "Software Developer Intern",
+  company: "Bluglint Solutions",
+  type: "Internship",
+  duration: "Present",
+  glow: "from-purple-500/20 to-fuchsia-600/5",
+  accentColor: "border-purple-400/35 text-purple-400",
+  responsibilities: [
+    "Developed and maintained responsive web applications using the MERN stack with a focus on scalability and performance.",
+    "Built reusable React components and modern user interfaces using Tailwind CSS to ensure a consistent user experience.",
+    "Integrated RESTful APIs with frontend applications and collaborated with backend developers to deliver end-to-end features.",
+    "Implemented authentication, form validation, and state management using modern JavaScript and React best practices.",
+    "Participated in Agile development, Git-based version control, code reviews, debugging, and performance optimization to deliver production-ready applications."
+  ],
+  techStack: [
+    "React.js",
+    "JavaScript",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "Tailwind CSS",
+    "HTML5",
+    "CSS3",
+    "Git",
+    "GitHub",
+    "REST APIs"
+  ]
+},
+  {
     id: "prodesk-it",
     role: "Full Stack Developer Intern",
     company: "ProDesk IT",
     type: "Internship",
-    duration: "Present", // Aap apne hisab se months/years daal sakte hain
+    duration: "Previous", 
     glow: "from-cyan-500/20 to-blue-600/5",
     accentColor: "border-cyan-400/35 text-cyan-400",
     responsibilities: [
@@ -90,7 +119,7 @@ export const EXPERIENCES = [
     role: "Frontend Developer Intern",
     company: "The Entrepreneurship Network (TEN)",
     type: "Internship",
-    duration: "Previous", // Aap apne hisab se timeline change kar sakte hain
+    duration: "Previous",
     glow: "from-indigo-500/20 to-purple-600/5",
     accentColor: "border-indigo-400/35 text-indigo-400",
     responsibilities: [
