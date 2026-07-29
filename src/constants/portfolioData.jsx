@@ -77,24 +77,24 @@ export const EXPERIENCES = [
   glow: "from-purple-500/20 to-fuchsia-600/5",
   accentColor: "border-purple-400/35 text-purple-400",
   responsibilities: [
-    "Developed and maintained responsive web applications using the MERN stack with a focus on scalability and performance.",
-    "Built reusable React components and modern user interfaces using Tailwind CSS to ensure a consistent user experience.",
-    "Integrated RESTful APIs with frontend applications and collaborated with backend developers to deliver end-to-end features.",
-    "Implemented authentication, form validation, and state management using modern JavaScript and React best practices.",
-    "Participated in Agile development, Git-based version control, code reviews, debugging, and performance optimization to deliver production-ready applications."
+    "Developed responsive and interactive web applications using React.js, JavaScript, and Tailwind CSS.",
+    "Built reusable, modular UI components to improve maintainability and ensure a consistent user experience.",
+    "Managed application state efficiently using Redux Toolkit for scalable frontend architecture.",
+    "Integrated REST APIs and handled asynchronous data fetching to display dynamic content in the application.",
+    "Collaborated with designers and developers in an Agile environment, using Git for version control and code collaboration.",
+    "Debugged UI issues, optimized frontend performance, and ensured cross-browser compatibility across modern web browsers."
   ],
   techStack: [
     "React.js",
     "JavaScript",
-    "Node.js",
-    "Express.js",
-    "MongoDB",
+    "Redux Toolkit",
     "Tailwind CSS",
     "HTML5",
     "CSS3",
     "Git",
     "GitHub",
-    "REST APIs"
+    "REST APIs",
+    "Responsive Design"
   ]
 },
   {
